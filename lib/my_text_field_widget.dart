@@ -12,36 +12,22 @@ class MyTextFieldWidget extends StatefulWidget {
 }
 
 class _MyTextFieldWidgetState extends State<MyTextFieldWidget> {
-  final TextEditingController _controller = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    // Optionally, you can set an initial value for the TextField
-    _controller.text = "Initial Text";
-
-    // // _controller.addListener(() {
-    // //   setState(() {}); });
-  }
-
-  @override
-  void dispose() {
-    // Dispose of the controller if no longer needed to avoid memory leaks
-    _controller.dispose();
-    super.dispose();
-  }
+  String _inputText = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('TextField Page'),
+        title: const Text('TextField Page - OnChanged'),
       ),
       body: Center(
         child: TextField(
-          controller: TextEditingController(
-              // text: "The initial Text",
-              ),
+          onChanged: (value) {
+            setState(() {
+              _inputText =
+                  value; // Updates the _inputText whenever the user types something
+            });
+          },
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
             hintText: 'Enter a search term',
